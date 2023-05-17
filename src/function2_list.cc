@@ -38,7 +38,7 @@ int Function2_list::size() const {
 
 Function2Ptr Function2_list::operator[](const int index) const
 {  
-	return _function.at[index];
+	return _function.at(index);
 }
 
 
@@ -55,7 +55,7 @@ void Function2_list::Function_add( Function2Ptr const f) {
 }
 
 
-void Function2_list::Function_Instal( Function2Ptr const _f, int index) {
+void Function2_list::Function_Instal( Function2Ptr const f, int index) {
 	/*if ((index < 0) || (index >= _size)) {
 		throw out_of_range("[Function2_list::Function_Instal] Index is out of range.");
 	}
@@ -127,7 +127,7 @@ int function2::last_max(const Function2_list& function, const float x){
 	const auto n = function.size();
 
 	float maxvalue = function[n-1]->function_x(x);
-	int maxindex = n-1;
+	int maxindex =n-1;
 
 	for (int i = n-1; i >=0; --i) {
 		const auto value = function[i]->function_x(x);
@@ -145,7 +145,7 @@ void Function2_list::show() {
 	cout << " Список:" << endl;
 	cout << " " << setiosflags(ios::left) << setw(10) << "Индекс" << setw(20) << "Тип функции" << setw(33) << "Функция" << setw(32)  << "Производная функции" << setw(25) << "Первообразная функции" << endl;
 	for (int i(0); i < size(); ++i) {
-		cout << " " << setiosflags(ios::left) << setw(10) << i
+		cout << " " << setiosflags(ios::left) << setw(10) << i;
 		_function[i]->print_function();
 	}
 	/*for (int i = 0; i < _size; ++i) {

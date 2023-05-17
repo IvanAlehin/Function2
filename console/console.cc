@@ -225,11 +225,11 @@ int main()
 		setlocale(LC_ALL, " ");
 		TypeF type;
 		Function2_list function;
-		function.Function_add(Function2::create_square(1.517,2,3));
-		function.Function_add(Function2::create_square(-2, 5.21, 7));
-		function.Function_add(Function2::create_square(3, -8.86, 7.3));
-		function.Function_add(Function2::create_garmonic(-5, Pi, Pi/2));
-		function.Function_add(Function2::create_garmonic(3.87, 2*Pi, 3));
+		function.Function_add(make_shared<SquareFunction>(1.517,2,3));
+		function.Function_add(make_shared<SquareFunction>(-2, 5.21, 7));
+		function.Function_add(make_shared<SquareFunction>(3, -8.86, 7.3));
+		function.Function_add(make_shared<GarmonicFunction>(-5, Pi, Pi/2));
+		function.Function_add(make_shared<GarmonicFunction>(3.87, 2*Pi, 3));
 		int x,n=5;
 		while (true) {
 			system("cls");

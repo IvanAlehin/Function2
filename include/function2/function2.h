@@ -62,6 +62,7 @@ namespace function2 {
         float  get_a() const;
         float  get_b() const;
         float  get_c() const;
+        virtual void print_function() const override;
         float function_x(float x) const override;
         Function2Ptr proizvod() const override;
         Function2Ptr pervoobraz() const override;
@@ -79,6 +80,7 @@ namespace function2 {
         float  get_a() const;
         float  get_b() const;
         float  get_c() const;
+        virtual void print_function() const override;
         float function_x(float x) const override;
         Function2Ptr proizvod() const override;
         Function2Ptr pervoobraz() const override;

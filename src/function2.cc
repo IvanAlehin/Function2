@@ -60,7 +60,7 @@ Function2Ptr SquareFunction::pervoobraz() const {
     throw runtime_error("[Function2::pervoobraz],the primitive quadratic function cannot be realized according to the condition of this problem ");
 }
 
-FunctionPtr SquareFunction::clone() const {
+Function2Ptr SquareFunction::clone() const {
     return make_shared<SquareFunction>(_a, _b, _c);
 }
 
@@ -73,7 +73,7 @@ bool SquareFunction::equals(Function2Ptr other) const {
 }
 void SquareFunction::print_function() const
 {
-    cout << setiosflags(ios::left) << setw(20) << "Квадратический" << get_a() << "*x^2 + (" << get_b() << ")*x + (" << get_c() << ")		" << > get_a() * 2 << "*x + (" << get_b() << ")			" << setw(20) << "Невозможно получить" << endl;
+    cout << setiosflags(ios::left) << setw(20) << "Квадратический" << get_a() << "*x^2 + (" << get_b() << ")*x + (" << get_c() << ")		" << get_a() * 2 << "*x + (" << get_b() << ")			" << setw(20) << "Невозможно получить" << endl;
 }
 //
 GarmonicFunction::GarmonicFunction(const float a, const float b, const float c) : _a(a), _b(b), _c(c) {}
@@ -98,7 +98,7 @@ Function2Ptr GarmonicFunction::pervoobraz() const {
     }
 }
 
-FunctionPtr GarmonicFunction::clone() const {
+Function2Ptr GarmonicFunction::clone() const {
     return make_shared<GarmonicFunction>(_a, _b, _c);
 }
 
