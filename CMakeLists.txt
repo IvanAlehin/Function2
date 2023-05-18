@@ -30,6 +30,3 @@ FetchContent_MakeAvailable(googletest)
 # Объявляем тесты
 add_executable(function2_tests "tests/function2_tests.cc")
 target_link_libraries(function2_tests function2 GTest::gtest_main)
-# Объявляем меню
-add_executable(console "console/console.cc")
-target_link_libraries(console function2 GTest::gtest_main)

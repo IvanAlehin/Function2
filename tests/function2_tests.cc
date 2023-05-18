@@ -5,185 +5,142 @@
 using namespace function2;
 using namespace std;
 
-TEST(Function2_Tests, SquareTest1) {
-    const auto square1 = Function2::create_square(1, 2, 3);
-    const auto square2 = Function2::create_square(2, 5, -4);
+TEST(Function2_Tests, Test1) {
+    Function2 one1(TypeF::Square, 1, 2, 3);
+    Function2 one2(TypeF::Square, 2, 5, -4);
 
-    EXPECT_NEAR(square1->function_x(1), 6, Epsilon);
-    EXPECT_NEAR(square1->function_x(3), 18, Epsilon);
+    EXPECT_NEAR(one1.function_x(1), 6, Epsilon);
+    EXPECT_NEAR(one1.function_x(3), 18, Epsilon);
 
-    EXPECT_NEAR(square2->function_x(2), 14, Epsilon);
-    EXPECT_NEAR(square2->function_x(-3), -1, Epsilon);
-
-    delete square1;
-    delete square2;
+    EXPECT_NEAR(one2.function_x(2), 14, Epsilon);
+    EXPECT_NEAR(one2.function_x(-3), -1, Epsilon);
 }
 
-TEST(Function2_Tests, GarmonicTest2) {
-    const auto garmonic1 = Function2::create_garmonic(3, 2, 0);
-    const auto garmonic2 = Function2::create_garmonic(2, 3, Pi / 2);
+TEST(Function2_Tests, Test2) {
+    Function2 two1(TypeF::Garmonic, 3, 2);
+    Function2 two2(TypeF::Garmonic, 2, 3, Pi / 2);
 
-    EXPECT_NEAR(garmonic1->function_x(Pi / 6), 1.5, Epsilon);
-    EXPECT_NEAR(garmonic1->function_x(0), 3, Epsilon);
-    EXPECT_NEAR(garmonic1->function_x(Pi / 4), 0, Epsilon);
-    EXPECT_NEAR(garmonic1->function_x(Pi / 2), -3, Epsilon);
+    EXPECT_NEAR(two1.function_x(Pi / 6), 1.5, Epsilon);
+    EXPECT_NEAR(two1.function_x(0), 3, Epsilon);
+    EXPECT_NEAR(two1.function_x(Pi / 4), 0, Epsilon);
+    EXPECT_NEAR(two1.function_x(Pi / 2), -3, Epsilon);
 
-    EXPECT_NEAR(garmonic2->function_x(Pi / 6), -2, Epsilon);
-    EXPECT_NEAR(garmonic2->function_x(0), 0, Epsilon);
-    EXPECT_NEAR(garmonic2->function_x(Pi / 18), -1, Epsilon);
-    EXPECT_NEAR(garmonic2->function_x(Pi / 2), 2, Epsilon);
-
-    delete garmonic1;
-    delete garmonic2;
+    EXPECT_NEAR(two2.function_x(Pi / 6), -2, Epsilon);
+    EXPECT_NEAR(two2.function_x(0), 0, Epsilon);
+    EXPECT_NEAR(two2.function_x(Pi / 18), -1, Epsilon);
+    EXPECT_NEAR(two2.function_x(Pi / 2), 2, Epsilon);
 }
 
-TEST(Function2_Tests, SproizvodTest3) {
-    const auto square1 = Function2::create_square(1, 2, 3);
-    const auto square2 = Function2::create_square(23, -2, 8);
+TEST(Function2_Tests, Test3) {
+    Function2 three(TypeF::Square, 3, 2, 1);
+    Function2 time = three.proizvod();
 
-    const auto square1_dx = square1->proizvod();
-    const auto square2_dx = square2->proizvod();
-
-    EXPECT_EQ(*square1->proizvod(), *Function2::create_square(0, 2, 3));
-    EXPECT_EQ(*square2->proizvod(), *Function2::create_square(0, 46, -2));
-
-    delete square1_dx;
-    delete square2_dx;
-    delete square1;
-    delete square2;
-
+    EXPECT_NEAR(time.function_x(1), 8, Epsilon);
+    EXPECT_NEAR(time.function_x(3), 20, Epsilon);
+    EXPECT_NEAR(time.function_x(-2), -10, Epsilon);
 }
 
-TEST(Function2_Tests, GproizvodTest4) {
+TEST(Function2_Tests, Test4) {
+    Function2 four(TypeF::Garmonic, 2, Pi, Pi / 2);
+    Function2 time = four.proizvod();
+    Function2 four2(TypeF::Garmonic, 1, Pi / 2, 0);
+    Function2 time2 = four2.proizvod();
 
+    EXPECT_NEAR(time.function_x(0.5), 0, Epsilon);
+    EXPECT_NEAR(time.function_x(1), 2 * Pi, Epsilon);
 
-    const auto garmonic1 = Function2::create_garmonic(2, Pi, Pi / 2);
-    const auto garmonic2 = Function2::create_garmonic(1, Pi / 2, 0);
-
-    const auto garmonic1_dx = garmonic1->proizvod();
-    const auto garmonic2_dx = garmonic2->proizvod();
-
-    EXPECT_EQ(*garmonic1->proizvod(), *Function2::create_garmonic(2 * Pi, Pi, Pi / 2 + Pi / 2));
-    EXPECT_EQ(*garmonic2->proizvod(), *Function2::create_garmonic(Pi / 2, Pi / 2, Pi / 2));
-
-    delete garmonic1_dx;
-    delete garmonic2_dx;
-    delete garmonic1;
-    delete garmonic2;
+    EXPECT_NEAR(time2.function_x(3), Pi / 2, Epsilon);
+    EXPECT_NEAR(time2.function_x(2), 0, Epsilon);
 }
 
-TEST(Function2_Tests, SpervoobrazTest5) {
-    const auto square1 = Function2::create_square(10, 24, 3872);
-    const auto square1_ = square1->pervoobraz();
+TEST(Function2_Tests, Test5) {
+    Function2 five(TypeF::Square, 6, 2, 5);
+    Function2 time = five.pervoobraz();
 
-    EXPECT_EQ(*square1->proizvod(), *Function2::create_square(0, 20, 24));
-
-    delete square1_;
-    delete square1;
+    EXPECT_NEAR(time.function_x(-2), -22, Epsilon);
+    EXPECT_NEAR(time.function_x(1), 8, Epsilon);
+    EXPECT_NEAR(time.function_x(3), 78, Epsilon);
 }
 
-TEST(Function2_Tests, GpervoobrazTest6) {
-    const auto garmonic1 = Function2::create_garmonic(2 * Pi, Pi / 2, 0);
-    const auto garmonic2 = Function2::create_garmonic(Pi * Pi, Pi / 3, Pi / 6);
+TEST(Function2_Tests, Test6) {
+    Function2 six(TypeF::Garmonic, 2 * Pi, Pi / 2, 0);
+    Function2 time = six.pervoobraz();
+    Function2 six2(TypeF::Garmonic, Pi * Pi, Pi / 3, Pi / 6);
+    Function2 time2 = six2.pervoobraz();
 
-    const auto garmonic1_ = garmonic1->pervoobraz();
-    const auto garmonic2_ = garmonic2->pervoobraz();
+    EXPECT_NEAR(time.function_x(1), 4, Epsilon);
+    EXPECT_NEAR(time.function_x(3), -4, Epsilon);
 
-    EXPECT_EQ(*garmonic1->pervoobraz(), *Function2::create_garmonic((-1) * 4, Pi / 2, Pi / 2));
-    EXPECT_EQ(*garmonic2->pervoobraz(), *Function2::create_garmonic((-1) * 3 * Pi, Pi / 3, (Pi / 6) + (Pi / 2)));
-
-    delete garmonic1_;
-    delete garmonic2_;
-    delete garmonic1;
-    delete garmonic2;
-
+    EXPECT_NEAR(time2.function_x(-1), (-3 * Pi) / 2, Epsilon);
+    EXPECT_NEAR(time2.function_x(-2), -3 * Pi, Epsilon);
 }
 
-TEST(Function2_Tests, Gb0Test7) {
-    const auto garmonic1 = Function2::create_garmonic(2 * Pi, 0, 1);
-    const auto garmonic1_ = garmonic1->pervoobraz();
+TEST(Function2_Tests, Test7) {
+    Function2 seven(TypeF::Garmonic, Pi / 2, 2, 0);
+    Function2 time = seven.pervoobraz();
 
-    EXPECT_EQ(*garmonic1->pervoobraz(), *Function2::create_garmonic((-1) * 4, Pi / 2, Pi / 2));
-
-    delete garmonic1_;
-    delete garmonic1;
+    EXPECT_NEAR(time.function_x(3), 2, Epsilon);
 }
 
-TEST(Index_last_max, NoResult) {
+TEST(Function2_Tests, Test8)
+{
     Function2_list function;
-    const auto index = last_max(function, 0);
-    ASSERT_EQ(index, -1);
+
+    Function2 eight(TypeF::Square, 5, 1, -2);
+    for (int i = 0; i < Function2_list::COUNTER; ++i) {
+        function.Function_add(eight);
+    }
+    ASSERT_ANY_THROW(function.Function_add(eight));
 }
 
-TEST(Index_last_max, ArgOne) {
-    Function2_list function;
-    function.Function_add(Function2::create_square(100, 24, 3));
-    function.Function_add(Function2::create_garmonic(2, Pi, 0));
-    function.Function_add(Function2::create_square(25, 30, 79));
-    function.Function_add(Function2::create_garmonic(53, 1, Pi));
-    function.Function_add(Function2::create_square(14, -24, 23));
-    function.Function_add(Function2::create_garmonic(2, -Pi, Pi / 2));
-    const auto index = last_max(function, 1);
+TEST(Function2_list_Test, Test9) {
+    Function2_list _function;
+    Function2 One(TypeF::Square, 0, 2, 3),
+        Two(TypeF::Square, -2, 25, -3),
+        Three(TypeF::Garmonic, 66, Pi, 2),
+        Four(TypeF::Garmonic, 0, 2, 3);
+    _function.Function_add(One);
+    _function.Function_add(Two);
+    _function.Function_add(Three);
+    _function.Function_add(Four);
 
-    ASSERT_EQ(index, 2);
+    int index = _function.last_max(_function, -6);
+
+    ASSERT_EQ(index, 1);
 }
 
-TEST(Index_last_max, ArgPi) {
-    Function2_list function;
-    function.Function_add(Function2::create_square(Pi, 24, 3));
-    function.Function_add(Function2::create_garmonic(24, Pi, Pi));
-    function.Function_add(Function2::create_square(140, 24, 2));
-    function.Function_add(Function2::create_garmonic(2, -Pi, Pi / 6));
-    function.Function_add(Function2::create_square(140, 24, 2));
-    function.Function_add(Function2::create_garmonic(2, -Pi, Pi / 6));
-    const auto index = last_max(function, 1);
+
+TEST(Function2_list_Test, Test10) {
+    Function2_list _function;
+    Function2 One(TypeF::Garmonic, 1, 2, 3),
+        Two(TypeF::Garmonic, 1, 2, 3),
+        Three(TypeF::Garmonic, 1, 2, 3),
+        Four(TypeF::Garmonic, 1, 2, 3);
+    _function.Function_add(One);
+    _function.Function_add(Two);
+    _function.Function_add(Three);
+    _function.Function_add(Four);
+
+    int index = _function.last_max(_function, 0.5);
+
+    ASSERT_EQ(index, 3);
+}
+TEST(Function2_list_Test, Test11) {
+    Function2_list _function;
+    Function2 One(TypeF::Square, -5, 2, 1),
+        Two(TypeF::Garmonic, Pi, 2, Pi / 2),
+        Three(TypeF::Square, 1, 5, 6),
+        Four(TypeF::Garmonic, 1, Pi, 3),
+        Five(TypeF::Square, 5, 1, 66),
+        Six(TypeF::Garmonic, 5, Pi / 2, Pi / 6);
+    _function.Function_add(One);
+    _function.Function_add(Two);
+    _function.Function_add(Three);
+    _function.Function_add(Four);
+    _function.Function_add(Five);
+    _function.Function_add(Six);
+
+    int index = _function.last_max(_function, 3);
 
     ASSERT_EQ(index, 4);
 }
-
-TEST(Instal_index, IndexTest1) {
-    Function2_list function;
-    function.Function_add(Function2::create_square(Pi, 24, 3));
-    function.Function_add(Function2::create_garmonic(24, Pi, Pi));
-    function.Function_add(Function2::create_square(140, 24, 2));
-    function.Function_add(Function2::create_garmonic(2, -Pi, Pi / 6));
-    function.Function_add(Function2::create_square(140, 24, 2));
-    function.Function_add(Function2::create_garmonic(2, -Pi, Pi / 6));
-    const auto index = 0;
-    EXPECT_EQ(*function[index], *Function2::create_square(Pi, 24, 3));
-}
-TEST(Instal_index, IndexTest2) {
-    Function2_list function;
-    function.Function_add(Function2::create_square(Pi, 24, 3));
-    function.Function_add(Function2::create_garmonic(24, Pi, Pi));
-    function.Function_add(Function2::create_square(140, 24, 2));
-    function.Function_add(Function2::create_garmonic(2, -Pi, Pi / 6));
-    function.Function_add(Function2::create_square(140, 24, 2));
-    function.Function_add(Function2::create_garmonic(2, -Pi, Pi / 6));
-    const auto index = 0;
-    function.Function_Instal(Function2::create_garmonic(2, -Pi, Pi / 6), index);
-    EXPECT_EQ(*function[index], *Function2::create_garmonic(2, -Pi, Pi / 6));
-}
-TEST(Insert, InserTest) {
-    Function2_list function;
-    function.Function_add(Function2::create_square(Pi, 24, 3));
-    function.Function_add(Function2::create_garmonic(24, Pi, Pi));
-    function.Function_add(Function2::create_square(140, 24, 2));
-    const auto index = 1;
-    function.Function_Insert(Function2::create_garmonic(2, -Pi, Pi / 6), index);
-    EXPECT_EQ(*function[index], *Function2::create_garmonic(2, -Pi, Pi / 6));
-    EXPECT_EQ(*function[index + 1], *Function2::create_garmonic(24, Pi, Pi));
-    EXPECT_EQ(*function[index + 2], *Function2::create_square(140, 24, 2));
-    EXPECT_EQ(function.get_size(), 4);
-}
-TEST(Delete, DeleteTest) {
-    Function2_list function;
-    function.Function_add(Function2::create_square(Pi / 2, 2, 13));
-    function.Function_add(Function2::create_garmonic(284, Pi * 6, Pi));
-    function.Function_add(Function2::create_square(1, 25, 3));
-    const auto index = 1;
-    function.Function_Delete(index);
-    EXPECT_EQ(*function[index], *Function2::create_square(1, 25, 3));
-    EXPECT_EQ(function.get_size(), 2);
-}
-
