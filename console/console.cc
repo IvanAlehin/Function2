@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
-
+#include <Windows.h>
 #include <function2/function2.h>
 #include <conio.h>
 #include <iostream>
-#include <Windows.h>
+
 using namespace function2;
 using namespace std;
 
@@ -223,7 +223,6 @@ int main()
 		SetConsoleCP(1251);
 		SetConsoleOutputCP(1251);
 		setlocale(LC_ALL, " ");
-		TypeF type;
 		Function2_list function;
 		function.Function_add(make_shared<SquareFunction>(1.517,2,3));
 		function.Function_add(make_shared<SquareFunction>(-2, 5.21, 7));
